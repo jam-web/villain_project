@@ -49,7 +49,10 @@ def logout(request):
     return redirect('/login')
 
 def villains(request):
-    return render(request, "villain.html")
+    context = {
+        "villains":Villain.objects.all()
+    }
+    return render(request, "villain.html", context)
 
 def get_villains(request):
     if request.method == "POST":
@@ -89,17 +92,18 @@ def add(request):
         }
     return render(request, "addvillain.html", context)
 
-def add_villain(requesst):
-    new_villain=Villain.objects.create(
-        name = request.POST["name"],
-        description = request.POST['description'],
+def add_villain(request):
+    villain = Villain.objects.create(
+        name = request.POST['name'],
+        description = request.POST["description"],
         interests = request.POST['interests'],
-        villain_url = request.POST["villain_url"],
-        date_added = request.POST["updated_at"],
-        )
-    return redirect("/villains")
+        user_villain = User.objects.get(id=request.session['id']),
+        villain_img = request.FILES["villain_url"],
+    )
+    print(villain)
+    return redirect('/add')
 
-def delete(request):
+def  delete(request):
     return render(request, 'deletevillain.html')
 
 def delete_villain(request):

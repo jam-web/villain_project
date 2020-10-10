@@ -25,7 +25,8 @@
         <a href="/delete"><i class="fas fa-times"> </i> remove card<a>
     </div>
     </div>
-    <form action="/get_villains" method="POST">
+    <form action="/add_villain" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
     <div class="form">
         <div class="form-input">
           <label for="name">name</label>
@@ -41,8 +42,9 @@
         </div>
         <div class="form-input">
           <label for="image url">image url</label>
-          <input type="url" name="villain_url"/>
+          <input type="file" name="villain_url"/>
         </div>
+        <button type="submit">Submit</button>
     </form>
     </div>
   </div>

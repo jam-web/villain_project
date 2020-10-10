@@ -59,10 +59,9 @@ class Villain(models.Model):
     name = models.CharField(max_length=45)
     description = models.CharField(max_length=45)
     interests = models.CharField(max_length=45)
-    user_villain = models.ForeignKey(
-        User, related_name="user_adds_villain", on_delete=models.CASCADE)
+    villain_img = models.ImageField(upload_to="images/", null=True, blank=True)
+    user_villain = models.ForeignKey(User, related_name="user_adds_villain", on_delete=models.CASCADE)
     user_likes = models.ManyToManyField(User, related_name="user_likes_villain")
-    villain_url = models.URLField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = VillainManager()
