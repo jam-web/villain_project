@@ -54,32 +54,6 @@ def villains(request):
     }
     return render(request, "villain.html", context)
 
-def get_villains(request):
-    if request.method == "POST":
-        errors = Villain.objects.validator(request.POST)
-        if len(errors)>0:
-            for key, value in errors.items():
-                messages.error(request, value)
-            return redirect('/')
-    villain=Villain.objects.create(
-        name = request.POST["name"],
-        description = request.POST['description'],
-        interests = request.POST['interests'],
-        villain_url = request.POST['villain_url'],
-        date_added = request.POST["updated_at"],
-    )
-    return redirect('/villains')
-
-def villain_cards(request):
-    if request.method == "GET":
-        return redirect("/")
-    user=User.objects.all()
-    villain=Villain.objects.all()
-    context = {
-        "all_villains":all_villains,
-        "all_users":all_users
-    }
-    return render(request, "villain.html", context) 
 
 def add(request):
     if "id" not in request.session:
@@ -98,17 +72,21 @@ def add_villain(request):
         description = request.POST["description"],
         interests = request.POST['interests'],
         user_villain = User.objects.get(id=request.session['id']),
-        villain_img = request.FILES["villain_url"],
+        villain_img = request.FILES["villain_img"],
     )
-    print(villain)
     return redirect('/add')
 
-def  delete(request):
-    return render(request, 'deletevillain.html')
+def delete(request):
+    context = {
+        "villains":Villain.objects.all()
+    }
+    return render(request, 'deletevillain.html', context)
 
 def delete_villain(request):
-    name = request.POST.get("name")
-    villain = Villain.objects.filter(name=name.first())
-    if villain == villain:
-        return redirect(f'/villains')
-    return redirect("/")
+    if request.method == "POST":
+        villain=Villain.objects.filter(id = request.POST['villain_id'])
+        if len(villain) != 1:
+            return redirect("/villains")
+        villain[0].delete()
+        return redirect("/villains")
+    

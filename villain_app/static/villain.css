@@ -63,7 +63,7 @@ body {
 }
 
 .card {
-    width: 350px;
+    width: 25%;
     background-color: #f4ede1;
     margin: 5px auto 20px auto;
     box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.17);
@@ -71,7 +71,7 @@ body {
 }
 
 .card-image {
-    width: 300px;
+    width: 350px;
     height: auto;
     border-radius: 10%;
     margin: 5px 25px;

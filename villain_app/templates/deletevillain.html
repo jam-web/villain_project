@@ -25,15 +25,22 @@
     <div class="header-right">
         <a href="/add"><i class="fas fa-plus"></i> add card</a>
         <a href="/delete"><i class="fas fa-times"> </i> remove card</a>
+        <a href="/logout"><i class="fas fa-plus"></i> logout </a>
+        <a href="/"><i class="fas fa-plus"></i> back </a>
     </div>
   </div>
   <div class="form">
-    <form action="/delete" method="POST">
+    <form action="/delete_villain" method="POST">
       {% csrf_token %}
       <h2>REMOVE A CARD</h2>
         <div class="form-input">
           <label>name</label>
-          <input type="text" name="name"/>
+          <select name="villain_id">
+            <option value="">Select Villain</option>
+            {% for villain in villains %}
+            <option value="{{villain.id}}">{{villain.name}}</option>
+            {% endfor %}
+          </select>
         </div>
         <button type="submit">Remove Me!</button>
     </form>
