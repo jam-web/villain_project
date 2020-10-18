@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Villains</title>
+  {% load static %}
+  <script src="https://kit.fontawesome.com/8391330468.js" crossorigin="anonymous">
+	</script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel='stylesheet' href="{%static 'style.css'%}">
+  <link rel= "stylesheet" type= "text/css" href= "static/villain.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+	<div class="header">
+    <a href="/" class="logo"><img src="https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2019/09/superlogo.png" alt="logo"></a>
+          <div class="header-right">
+      <a href="/add"><i class="fas fa-plus"></i> add card</a>
+      <a href="/delete"><i class="fas fa-times"> </i> remove card</a>
+      <a href="/logout"><i class="fas fa-plus"></i> logout </a>
+      <a href="/villains"><i class="fas fa-plus"></i> back </a>
+    </div>
+  </div>
+  <div class="content">
+    {% for villain in villains %}
+  <div class="card">
+    <div class="card-body"></div>
+      <div class="card-name">{{villain.name}}</div>
+        <div class="card-description">{{villain.description}}</div>
+          <div class="card-image"><img src="{{villain.villain_img.url}}" width=300px></div>
+              <input type="hidden" name="villain_id" value="{{villain.id}}">
+            <div class="card-interests">{{villain.interests}}</div>
+          </div>
+    {% endfor %}
+  </div>
+</div>
+</body>
+</html>
